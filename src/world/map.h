@@ -8,8 +8,11 @@ private:
 	Rectangle mapLimits;
 
 public:
-	Vector2 GetMapLimits() const;
 	void DrawMap() const;
+	void ClampInside(Rectangle& rect) const;
+	Vector2 CentralSpawn(const Vector2& size) const;
+	Vector2 RandomSpawn(const Vector2& size) const;
+
 
 	Maps(Rectangle mapLimits);
 };
