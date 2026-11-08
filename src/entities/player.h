@@ -1,5 +1,6 @@
 #pragma once
 #include "entity.h"
+#include "world/map.h"
 
 class Player : public Entity
 {
@@ -12,5 +13,6 @@ private:
 
 public:
 	Player(Rectangle playerHitbox);
+	void Update(const Maps& map);
 	void Draw() override;
 };
