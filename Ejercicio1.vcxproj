@@ -11,11 +11,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\entities\collectible.cpp" />
+    <ClCompile Include="src\entities\enemy.cpp" />
+    <ClCompile Include="src\entities\entity.cpp" />
+    <ClCompile Include="src\entities\life_collectible.cpp" />
+    <ClCompile Include="src\entities\multiplier_collectible.cpp" />
+    <ClCompile Include="src\entities\player.cpp" />
+    <ClCompile Include="src\entities\points_collectible.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenes\gameplay.cpp" />
+    <ClCompile Include="src\ui\hud.cpp" />
+    <ClCompile Include="src\world\map.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\entities\collectible.h" />
+    <ClInclude Include="src\entities\enemy.h" />
+    <ClInclude Include="src\entities\entity.h" />
+    <ClInclude Include="src\entities\life_collectible.h" />
+    <ClInclude Include="src\entities\multiplier_collectible.h" />
+    <ClInclude Include="src\entities\player.h" />
+    <ClInclude Include="src\entities\points_collectible.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\scenes\gameplay.h" />
+    <ClInclude Include="src\ui\hud.h" />
+    <ClInclude Include="src\world\map.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
