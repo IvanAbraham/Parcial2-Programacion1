@@ -1,6 +1,9 @@
 #pragma once
 #include "entities/player.h"
 #include "entities/enemy.h"
+#include "entities/points_collectible.h"
+#include "entities/life_collectible.h"
+#include "entities/multiplier_collectible.h"
 #include <vector>
 
 class Gameplay
