@@ -11,6 +11,7 @@ private:
 	float speed;
 	Vector2 spawnPoint;
 	Color color;
+	float remainingTime;
 
 public:
 	Player(Rectangle playerHitbox);
@@ -22,5 +23,7 @@ public:
 	void AddScore(int bonusScore);
 	void MultiplyScore(float scoreMultiplier);
 	void Draw() const override;
-
+	float GetRemainingTime() const;
+	bool IsAlive() const;
+	bool IsTimeOver() const;
 };

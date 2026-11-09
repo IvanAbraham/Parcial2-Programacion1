@@ -15,6 +15,15 @@ static const Vector2 collectibleSize = { 20.0f, 20.0f };
 static const int maxSpawnAttempts = 100;
 static const float playerSafeMargin = 50.0f;
 
+static const Color overlayColor = { 0, 0, 0, 180 };
+static const int titleFontSize = 50;
+static const int subtitleFontSize = 25;
+
+static void DrawCenteredText(const char* text, int y, int fontSize, Color color)
+{
+    DrawText(text, GetScreenWidth() / 2 - MeasureText(text, fontSize) / 2, y, fontSize, color);
+}
+
 static Rectangle CalculateMapLimits()
 {
     float screenWidth = static_cast<float>(GetScreenWidth());
@@ -54,7 +63,7 @@ Rectangle Gameplay::FindFreeSpawn(Vector2 size) const
     return candidate;
 }
 
-Gameplay::Gameplay() : map(CalculateMapLimits()), player(CalculatePlayerSpawn(map))
+Gameplay::Gameplay() : map(CalculateMapLimits()), player(CalculatePlayerSpawn(map)), hud(player), state(GameState::Playing)
 {
     for (int i = 0; i < enemiesAmount; i++)
         entities.push_back(new Enemy(FindFreeSpawn(enemiesSize)));
@@ -78,12 +87,14 @@ Gameplay::~Gameplay()
 
 void Gameplay::Update()
 {
+    if (state != GameState::Playing)
+        return;
+
     player.Update(map);
+
     for (size_t i = 0; i < entities.size(); i++)
-        if(player.Collide(*entities[i]))
-        {
+        if (player.Collide(*entities[i]))
             entities[i]->OnPlayerCollision(player);
-        }
 
     for (size_t i = entities.size(); i > 0; i--)
     {
@@ -95,6 +106,11 @@ void Gameplay::Update()
             entities.erase(entities.begin() + index);
         }
     }
+
+    if (!player.IsAlive())
+        state = GameState::Lost;
+    else if (player.IsTimeOver())
+        state = GameState::Won;
 }
 
 void Gameplay::Draw() const
@@ -106,4 +122,17 @@ void Gameplay::Draw() const
         entities[i]->Draw();
 
     player.Draw();
+    hud.Draw();
+
+    if (state != GameState::Playing)
+    {
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), overlayColor);
+
+        int centerY = GetScreenHeight() / 2;
+        bool won = state == GameState::Won;
+
+        DrawCenteredText(won ? "GANASTE" : "PERDISTE", centerY - 80, titleFontSize, won ? GREEN : RED);
+        DrawCenteredText(TextFormat("Puntaje final: %d", player.GetScore()), centerY, subtitleFontSize, WHITE);
+        DrawCenteredText("ESC para salir", centerY + 50, subtitleFontSize, GRAY);
+    }
 }

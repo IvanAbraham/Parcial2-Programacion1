@@ -6,13 +6,19 @@ static const int maxLives = 5;
 static const float playerSpeed = 250.0f;
 static const Color playerColor = SKYBLUE;
 
-Player::Player(Rectangle playerHitbox) : Entity(playerHitbox), currentLife(initialLives), maxLife(maxLives), score(0), speed(playerSpeed), spawnPoint({playerHitbox.x, playerHitbox.y}), color(playerColor)
+static const float gameDuration = 60.0f;
+
+Player::Player(Rectangle playerHitbox) : Entity(playerHitbox), currentLife(initialLives), maxLife(maxLives), score(0), speed(playerSpeed), spawnPoint({playerHitbox.x, playerHitbox.y}), color(playerColor), remainingTime(gameDuration)
 {
 }
 
 void Player::Update(const Maps& map)
 {
     Vector2 direction = { 0.0f, 0.0f };
+
+    remainingTime -= GetFrameTime();
+    if (remainingTime < 0.0f)
+        remainingTime = 0.0f;
 
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
         direction.y -= 1.0f;
@@ -66,4 +72,19 @@ void Player::AddScore(int bonusScore)
 void Player::MultiplyScore(float scoreMultiplier)
 {
     score = static_cast<int>(score * scoreMultiplier);
+}
+
+float Player::GetRemainingTime() const
+{
+    return remainingTime;
+}
+
+bool Player::IsAlive() const
+{
+    return currentLife > 0;
+}
+
+bool Player::IsTimeOver() const
+{
+    return remainingTime <= 0.0f;
 }
