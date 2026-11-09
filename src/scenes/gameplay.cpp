@@ -55,18 +55,29 @@ Gameplay::Gameplay() : map(CalculateMapLimits()), player(CalculatePlayerSpawn(ma
 
 Gameplay::~Gameplay()
 {
-    for (int i = 0; i < entities.size(); i++)
+    for (size_t i = 0; i < entities.size(); i++)
         delete entities[i];
 }
 
 void Gameplay::Update()
 {
     player.Update(map);
-    for (int i = 0; i < entities.size(); i++)
+    for (size_t i = 0; i < entities.size(); i++)
         if(player.Collide(*entities[i]))
         {
             entities[i]->OnPlayerCollision(player);
         }
+
+    for (size_t i = entities.size(); i > 0; i--)
+    {
+        size_t index = i - 1;
+
+        if (!entities[index]->IsActive())
+        {
+            delete entities[index];
+            entities.erase(entities.begin() + index);
+        }
+    }
 }
 
 void Gameplay::Draw() const

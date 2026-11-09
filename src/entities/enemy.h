@@ -1,7 +1,6 @@
 #pragma once
 #include <raylib.h>
 #include "entity.h"
-#include "world/map.h"
 
 class Enemy : public Entity
 {

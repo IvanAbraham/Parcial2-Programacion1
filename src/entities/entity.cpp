@@ -1,6 +1,6 @@
 #include "entity.h"
 
-Entity::Entity(Rectangle hitBox) : hitBox(hitBox)
+Entity::Entity(Rectangle hitBox) : hitBox(hitBox), active(true)
 {
 }
 
@@ -47,3 +47,8 @@ void Entity::DrawHumanoid(Color color) const
 }
 
 void Entity::OnPlayerCollision(Player& /*player*/) {}
+
+bool Entity::IsActive() const
+{
+    return active;
+}
