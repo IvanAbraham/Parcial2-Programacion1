@@ -52,3 +52,8 @@ bool Entity::IsActive() const
 {
     return active;
 }
+
+Rectangle Entity::GetHitBox() const
+{
+    return hitBox;
+}

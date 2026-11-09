@@ -12,6 +12,7 @@ private:
 	Maps map;
 	Player player;
 	std::vector<Entity*> entities;
+	Rectangle FindFreeSpawn(Vector2 size) const;
 
 public:
 	Gameplay();

@@ -11,6 +11,8 @@ protected:
 	void DrawHumanoid(Color color) const;
 
 public:
+	Rectangle GetHitBox() const;
+
 	bool Collide(const Entity& secondEntity) const;
 	bool IsActive() const;
 
