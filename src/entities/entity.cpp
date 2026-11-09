@@ -45,3 +45,5 @@ void Entity::DrawHumanoid(Color color) const
     DrawLineEx({ body.x, bodyBottom }, { x + w * 0.15f, y + h }, lineThickness, color);
     DrawLineEx({ body.x + bodyWidth, bodyBottom }, { x + w * 0.85f, y + h }, lineThickness, color);
 }
+
+void Entity::OnPlayerCollision(Player& /*player*/) {}

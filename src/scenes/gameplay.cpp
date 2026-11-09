@@ -42,6 +42,11 @@ Gameplay::~Gameplay()
 void Gameplay::Update()
 {
     player.Update(map);
+    for (int i = 0; i < entities.size(); i++)
+        if(player.Collide(*entities[i]))
+        {
+            entities[i]->OnPlayerCollision(player);
+        }
 }
 
 void Gameplay::Draw() const
