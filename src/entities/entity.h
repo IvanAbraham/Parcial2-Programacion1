@@ -10,7 +10,7 @@ protected:
 public:
 	bool Collide(const Entity& secondEntity) const;
 
-	virtual void Draw() = 0;
+	virtual void Draw() const = 0;
 
 	Entity(Rectangle hitBox);
 	virtual ~Entity();

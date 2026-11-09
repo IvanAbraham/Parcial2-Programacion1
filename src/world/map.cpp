@@ -25,7 +25,7 @@ Vector2 Maps::CentralSpawn(const Vector2& size) const
     return { x, y };
 }
 
-void Maps::DrawMap() const
+void Maps::Draw() const
 {
 	const float frameThickness = 2.0f;
 	DrawRectangleLinesEx(mapLimits, frameThickness, WHITE);

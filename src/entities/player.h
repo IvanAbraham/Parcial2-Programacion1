@@ -14,5 +14,5 @@ private:
 public:
 	Player(Rectangle playerHitbox);
 	void Update(const Maps& map);
-	void Draw() override;
+	void Draw() const override;
 };

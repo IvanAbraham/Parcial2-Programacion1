@@ -29,7 +29,7 @@ void Player::Update(const Maps& map)
     map.ClampInside(hitBox);
 }
 
-void Player::Draw()
+void Player::Draw() const
 {
     float x = hitBox.x;
     float y = hitBox.y;

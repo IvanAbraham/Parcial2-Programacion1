@@ -1,7 +1,6 @@
 #include "game.h"
 #include "raylib.h"
-#include "world/map.h"
-#include "entities/player.h"
+#include "scenes/gameplay.h"
 
 namespace game
 {
@@ -12,22 +11,16 @@ namespace game
     {
         InitWindow(screenWidth, screenHeight, "P1 Parcial 2 - Ivan Abraham");
 
-        const float hudHeight = 60.0f;
-        const float margin = 20.0f;
-        Maps map({ margin, hudHeight, screenWidth - margin * 2, screenHeight - hudHeight - margin });
-        const Vector2 playerSize = { 30.0f, 50.0f };
-        Vector2 playerSpawn = map.CentralSpawn(playerSize);
-        Player player({ playerSpawn.x, playerSpawn.y, playerSize.x, playerSize.y });
+        Gameplay gameplay;
 
         while (!WindowShouldClose())
         {
-            player.Update(map);
+            gameplay.Update();
 
             BeginDrawing();
-            ClearBackground(BLACK);
-            map.DrawMap();
-            player.Draw();
             
+            gameplay.Draw();
+
             EndDrawing();
         }
         CloseWindow();
