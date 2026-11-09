@@ -19,8 +19,8 @@ public:
 	int GetLife() const;
 	int GetScore() const;
 	void AddLife();
-	void AddScore();
-	void MultiplyScore();
+	void AddScore(int bonusScore);
+	void MultiplyScore(float scoreMultiplier);
 	void Draw() const override;
 
 };

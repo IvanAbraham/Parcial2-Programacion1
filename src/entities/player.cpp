@@ -3,9 +3,6 @@
 static const int initialLives = 3;
 static const int maxLives = 5;
 
-static const int bonusScore = 100;
-static const float scoreMultiplier = 1.2f;
-
 static const float playerSpeed = 250.0f;
 static const Color playerColor = SKYBLUE;
 
@@ -61,12 +58,12 @@ void Player::AddLife()
         currentLife++;
 }
 
-void Player::AddScore()
+void Player::AddScore(int bonusScore)
 {
     score += bonusScore;
 }
 
-void Player::MultiplyScore()
+void Player::MultiplyScore(float scoreMultiplier)
 {
     score = static_cast<int>(score * scoreMultiplier);
 }
