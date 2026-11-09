@@ -6,6 +6,7 @@ class Entity
 {
 protected:
 	Rectangle hitBox;
+	void DrawHumanoid(Color color) const;
 
 public:
 	bool Collide(const Entity& secondEntity) const;
