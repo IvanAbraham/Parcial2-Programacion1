@@ -9,7 +9,10 @@ static const float maxPlayerSpeed = 1000.0f;
 
 static const float gameDuration = 60.0f;
 
-Player::Player(Rectangle playerHitbox, Texture2D sprite) : Entity(playerHitbox, sprite), currentLife(initialLives), maxLife(maxLives), score(0), speed(playerSpeed), spawnPoint({ playerHitbox.x, playerHitbox.y }), remainingTime(gameDuration)
+static const int playerFrames = 3;
+static const int playerWalkFirstFrame = 1;
+
+Player::Player(Rectangle playerHitbox, Texture2D sprite) : Entity(playerHitbox, sprite, playerFrames, playerWalkFirstFrame), currentLife(initialLives), maxLife(maxLives), score(0), speed(playerSpeed), spawnPoint({ playerHitbox.x, playerHitbox.y }), remainingTime(gameDuration)
 {
 }
 
@@ -34,6 +37,16 @@ void Player::Update(const Maps& map)
         direction.x -= 1.0f;
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
         direction.x += 1.0f;
+
+    if (direction.x < 0.0f)
+        facingLeft = true;
+    else if (direction.x > 0.0f)
+        facingLeft = false;
+
+    if (direction.x != 0.0f || direction.y != 0.0f)
+        UpdateAnimation();
+    else
+        ResetAnimation();
 
     float step = speed * GetFrameTime();
     hitBox.x += direction.x * step;

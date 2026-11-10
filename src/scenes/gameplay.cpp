@@ -101,7 +101,7 @@ bool Gameplay::HasCollectiblesLeft() const
     return false;
 }
 
-Gameplay::Gameplay() : map(CalculateMapLimits()), playerTexture(LoadTexture("res/player.png")), enemyTexture(LoadTexture("res/enemy.png")), pointsTexture(LoadTexture("res/add_points.png")), lifeTexture(LoadTexture("res/heal.png")), multiplierTexture(LoadTexture("res/multiplier.png")), player(CalculatePlayerSpawn(map), playerTexture), hud(player), state(GameState::Playing), currentEnemies(enemiesStartAmount)
+Gameplay::Gameplay() : map(CalculateMapLimits()), playerTexture(LoadTexture("res/player-sheet.png")), enemyTexture(LoadTexture("res/enemy-sheet.png")), pointsTexture(LoadTexture("res/add_points.png")), lifeTexture(LoadTexture("res/heal.png")), multiplierTexture(LoadTexture("res/multiplier.png")), player(CalculatePlayerSpawn(map), playerTexture), hud(player), state(GameState::Playing), currentEnemies(enemiesStartAmount)
 {
     SpawnEnemies();
     SpawnCollectibles();

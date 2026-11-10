@@ -3,6 +3,7 @@
 #include "world/map.h"
 
 static const float enemySpeed = 120.0f;
+static const int enemyFrames = 3;
 
 static Vector2 RandomDirection()
 {
@@ -14,7 +15,7 @@ static Vector2 RandomDirection()
 	return { 0.0f, dir };
 }
 
-Enemy::Enemy(Rectangle hitbox, Texture2D sprite) : Entity(hitbox, sprite), speed(enemySpeed), dir(RandomDirection())
+Enemy::Enemy(Rectangle hitbox, Texture2D sprite) : Entity(hitbox, sprite, enemyFrames), speed(enemySpeed), dir(RandomDirection())
 {
 }
 
@@ -31,6 +32,8 @@ void Enemy::Update(const Maps& map)
         dir.x = -dir.x;
     if (hitBox.y != beforeClamp.y)
         dir.y = -dir.y;
+
+    UpdateAnimation();
 }
 
 void Enemy::Draw() const

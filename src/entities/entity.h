@@ -11,6 +11,13 @@ protected:
 	bool active;
 	Texture2D sprite;
 	void DrawSprite() const;
+	int frameCount;
+	int firstLoopFrame;
+	int currentFrame;
+	float frameTimer;
+	bool facingLeft;
+	void UpdateAnimation();
+	void ResetAnimation();
 
 public:
 	Rectangle GetHitBox() const;
@@ -24,6 +31,6 @@ public:
 	virtual bool IsCollectible() const;
 	
 
-	Entity(Rectangle hitBox, Texture2D sprite);
+	Entity(Rectangle hitBox, Texture2D sprite, int frameCount = 1, int firstLoopFrame = 0);
 	virtual ~Entity();
 };	
