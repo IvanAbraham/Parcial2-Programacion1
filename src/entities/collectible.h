@@ -9,4 +9,5 @@ public:
 	Collectible(Rectangle hitbox);
 	virtual void OnCollect(Player& player) = 0;
 	void OnPlayerCollision(Player& player) override;
+	bool IsCollectible() const override;
 };

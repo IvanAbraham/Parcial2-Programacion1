@@ -10,3 +10,8 @@ void Collectible::OnPlayerCollision(Player& player)
 	OnCollect(player);
 	active = false;
 }
+
+bool Collectible::IsCollectible() const
+{
+	return true;
+}

@@ -5,6 +5,8 @@ static const int maxLives = 5;
 
 static const float playerSpeed = 250.0f;
 static const Color playerColor = SKYBLUE;
+static const float speedIncreasePerSecond = 5.0f;
+static const float maxPlayerSpeed = 1000.0f;
 
 static const float gameDuration = 60.0f;
 
@@ -19,6 +21,11 @@ void Player::Update(const Maps& map)
     remainingTime -= GetFrameTime();
     if (remainingTime < 0.0f)
         remainingTime = 0.0f;
+
+    speed += speedIncreasePerSecond * GetFrameTime();
+
+    if (speed > maxPlayerSpeed)
+        speed = maxPlayerSpeed;
 
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
         direction.y -= 1.0f;

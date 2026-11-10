@@ -18,6 +18,7 @@ public:
 
 	virtual void Draw() const = 0;
 	virtual void OnPlayerCollision(Player& player);
+	virtual bool IsCollectible() const;
 
 	Entity(Rectangle hitBox);
 	virtual ~Entity();

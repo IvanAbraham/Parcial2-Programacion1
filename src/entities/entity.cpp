@@ -14,6 +14,11 @@ Entity::~Entity()
 	
 }
 
+bool Entity::IsCollectible() const
+{
+    return false;
+}
+
 void Entity::DrawHumanoid(Color color) const
 {
     float x = hitBox.x;

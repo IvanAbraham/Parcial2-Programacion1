@@ -17,6 +17,9 @@ enum class GameState
 class Gameplay
 {
 private:
+	void SpawnCollectibles();
+	bool HasCollectiblesLeft() const;
+
 	Maps map;
 	Player player;
 	Hud hud;

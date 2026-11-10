@@ -63,11 +63,8 @@ Rectangle Gameplay::FindFreeSpawn(Vector2 size) const
     return candidate;
 }
 
-Gameplay::Gameplay() : map(CalculateMapLimits()), player(CalculatePlayerSpawn(map)), hud(player), state(GameState::Playing)
+void Gameplay::SpawnCollectibles()
 {
-    for (int i = 0; i < enemiesAmount; i++)
-        entities.push_back(new Enemy(FindFreeSpawn(enemiesSize)));
-
     for (int i = 0; i < pointsCollectiblesAmount; i++)
         entities.push_back(new PointsCollectible(FindFreeSpawn(collectibleSize)));
 
@@ -78,6 +75,22 @@ Gameplay::Gameplay() : map(CalculateMapLimits()), player(CalculatePlayerSpawn(ma
         entities.push_back(new MultiplierCollectible(FindFreeSpawn(collectibleSize)));
 }
 
+bool Gameplay::HasCollectiblesLeft() const
+{
+    for (size_t i = 0; i < entities.size(); i++)
+        if (entities[i]->IsCollectible())
+            return true;
+
+    return false;
+}
+
+Gameplay::Gameplay() : map(CalculateMapLimits()), player(CalculatePlayerSpawn(map)), hud(player), state(GameState::Playing)
+{
+    for (int i = 0; i < enemiesAmount; i++)
+        entities.push_back(new Enemy(FindFreeSpawn(enemiesSize)));
+
+    SpawnCollectibles();
+}
 
 Gameplay::~Gameplay()
 {
@@ -106,6 +119,9 @@ void Gameplay::Update()
             entities.erase(entities.begin() + index);
         }
     }
+
+    if (!HasCollectiblesLeft())
+        SpawnCollectibles();
 
     if (!player.IsAlive())
         state = GameState::Lost;
