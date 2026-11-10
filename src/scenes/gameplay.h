@@ -18,7 +18,9 @@ class Gameplay
 {
 private:
 	void SpawnCollectibles();
+	void SpawnEnemies();
 	bool HasCollectiblesLeft() const;
+	void RefreshLevel();
 
 	Maps map;
 	
@@ -31,6 +33,7 @@ private:
 	Player player;
 	Hud hud;
 	GameState state;
+	int currentEnemies;
 	std::vector<Entity*> entities;
 	Rectangle FindFreeSpawn(Vector2 size) const;
 

@@ -4,7 +4,7 @@ static const float hudHeight = 60.0f;
 static const float mapMargin = 20.0f;
 static const Vector2 playerSize = { 32.0f, 50.0f };
 
-static const int enemiesAmount = 10;
+static const int enemiesStartAmount = 5;
 static const Vector2 enemiesSize = { 32.0f, 50.0f };
 
 static const int pointsCollectiblesAmount = 3;
@@ -75,6 +75,23 @@ void Gameplay::SpawnCollectibles()
         entities.push_back(new MultiplierCollectible(FindFreeSpawn(collectibleSize), multiplierTexture));
 }
 
+void Gameplay::SpawnEnemies()
+{
+    for (int i = 0; i < currentEnemies; i++)
+        entities.push_back(new Enemy(FindFreeSpawn(enemiesSize), enemyTexture));
+}
+
+void Gameplay::RefreshLevel()
+{
+    for (size_t i = 0; i < entities.size(); i++)
+        delete entities[i];
+    entities.clear();
+
+    currentEnemies++;
+    SpawnEnemies();
+    SpawnCollectibles();
+}
+
 bool Gameplay::HasCollectiblesLeft() const
 {
     for (size_t i = 0; i < entities.size(); i++)
@@ -84,11 +101,9 @@ bool Gameplay::HasCollectiblesLeft() const
     return false;
 }
 
-Gameplay::Gameplay() : map(CalculateMapLimits()), playerTexture(LoadTexture("res/player.png")), enemyTexture(LoadTexture("res/enemy.png")), pointsTexture(LoadTexture("res/add_points.png")), lifeTexture(LoadTexture("res/heal.png")), multiplierTexture(LoadTexture("res/multiplier.png")), player(CalculatePlayerSpawn(map), playerTexture), hud(player), state(GameState::Playing)
+Gameplay::Gameplay() : map(CalculateMapLimits()), playerTexture(LoadTexture("res/player.png")), enemyTexture(LoadTexture("res/enemy.png")), pointsTexture(LoadTexture("res/add_points.png")), lifeTexture(LoadTexture("res/heal.png")), multiplierTexture(LoadTexture("res/multiplier.png")), player(CalculatePlayerSpawn(map), playerTexture), hud(player), state(GameState::Playing), currentEnemies(enemiesStartAmount)
 {
-    for (int i = 0; i < enemiesAmount; i++)
-        entities.push_back(new Enemy(FindFreeSpawn(enemiesSize), enemyTexture));
-
+    SpawnEnemies();
     SpawnCollectibles();
 }
 
@@ -127,7 +142,7 @@ void Gameplay::Update()
     }
 
     if (!HasCollectiblesLeft())
-        SpawnCollectibles();
+        RefreshLevel();
 
     if (!player.IsAlive())
         state = GameState::Lost;
