@@ -30,6 +30,8 @@ void Entity::DrawSprite() const
 
 void Entity::OnPlayerCollision(Player& /*player*/) {}
 
+void Entity::Update(const Maps& /*map*/) {}
+
 bool Entity::IsActive() const
 {
     return active;

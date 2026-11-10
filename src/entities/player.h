@@ -15,7 +15,7 @@ private:
 public:
 	Player(Rectangle playerHitbox, Texture2D sprite);
 	void TakeHit();
-	void Update(const Maps& map);
+	void Update(const Maps& map) override;
 	int GetLife() const;
 	int GetScore() const;
 	void AddLife();

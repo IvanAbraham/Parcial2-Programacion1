@@ -2,6 +2,7 @@
 #include <raylib.h>
 
 class Player;
+class Maps;
 
 class Entity
 {
@@ -19,7 +20,9 @@ public:
 
 	virtual void Draw() const = 0;
 	virtual void OnPlayerCollision(Player& player);
+	virtual void Update(const Maps& map);
 	virtual bool IsCollectible() const;
+	
 
 	Entity(Rectangle hitBox, Texture2D sprite);
 	virtual ~Entity();

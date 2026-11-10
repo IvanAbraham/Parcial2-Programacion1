@@ -125,6 +125,9 @@ void Gameplay::Update()
         return;
 
     player.Update(map);
+    
+    for (size_t i = 0; i < entities.size(); i++)
+        entities[i]->Update(map);
 
     for (size_t i = 0; i < entities.size(); i++)
         if (player.Collide(*entities[i]))
