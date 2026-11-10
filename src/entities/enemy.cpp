@@ -2,15 +2,14 @@
 #include "player.h"
 
 static const float enemySpeed = 250.0f;
-static const Color enemyColor = RED;
 
-Enemy::Enemy(Rectangle hitbox) : Entity(hitbox), speed(enemySpeed), color(enemyColor)
+Enemy::Enemy(Rectangle hitbox, Texture2D sprite) : Entity(hitbox, sprite), speed(enemySpeed)
 {
 }
 
 void Enemy::Draw() const
 {
-	Entity::DrawHumanoid(color);
+	DrawSprite();
 }
 
 void Enemy::OnPlayerCollision(Player& player) 

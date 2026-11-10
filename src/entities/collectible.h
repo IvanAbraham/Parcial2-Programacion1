@@ -6,7 +6,7 @@ class Collectible : public Entity
 private:
 
 public:
-	Collectible(Rectangle hitbox);
+	Collectible(Rectangle hitbox, Texture2D sprite);
 	virtual void OnCollect(Player& player) = 0;
 	void OnPlayerCollision(Player& player) override;
 	bool IsCollectible() const override;

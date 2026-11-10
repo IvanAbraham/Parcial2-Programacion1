@@ -10,18 +10,17 @@ namespace game
     void Run()
     {
         InitWindow(screenWidth, screenHeight, "P1 Parcial 2 - Ivan Abraham");
-
-        Gameplay gameplay;
-
-        while (!WindowShouldClose())
         {
-            gameplay.Update();
+            Gameplay gameplay;
 
-            BeginDrawing();
-            
-            gameplay.Draw();
+            while (!WindowShouldClose())
+            {
+                gameplay.Update();
 
-            EndDrawing();
+                BeginDrawing();
+                gameplay.Draw();
+                EndDrawing();
+            }
         }
         CloseWindow();
     }

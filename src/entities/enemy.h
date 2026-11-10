@@ -6,9 +6,9 @@ class Enemy : public Entity
 {
 private:
 	float speed;
-	Color color;
+
 public:
-	Enemy(Rectangle hitbox);
+	Enemy(Rectangle hitbox, Texture2D sprite);
 	void Draw() const override;
 	void OnPlayerCollision(Player& player) override;
 };

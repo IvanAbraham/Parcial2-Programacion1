@@ -3,11 +3,8 @@
 
 class MultiplierCollectible : public Collectible
 {
-private:
-    Color color;
-
 public:
-    MultiplierCollectible(Rectangle hitbox);
+    MultiplierCollectible(Rectangle hitbox, Texture2D sprite);
     void Draw() const override;
     void OnCollect(Player& player) override;
 };

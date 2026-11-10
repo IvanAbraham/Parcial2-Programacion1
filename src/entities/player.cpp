@@ -4,13 +4,12 @@ static const int initialLives = 3;
 static const int maxLives = 5;
 
 static const float playerSpeed = 250.0f;
-static const Color playerColor = SKYBLUE;
 static const float speedIncreasePerSecond = 5.0f;
 static const float maxPlayerSpeed = 1000.0f;
 
 static const float gameDuration = 60.0f;
 
-Player::Player(Rectangle playerHitbox) : Entity(playerHitbox), currentLife(initialLives), maxLife(maxLives), score(0), speed(playerSpeed), spawnPoint({playerHitbox.x, playerHitbox.y}), color(playerColor), remainingTime(gameDuration)
+Player::Player(Rectangle playerHitbox, Texture2D sprite) : Entity(playerHitbox, sprite), currentLife(initialLives), maxLife(maxLives), score(0), speed(playerSpeed), spawnPoint({ playerHitbox.x, playerHitbox.y }), remainingTime(gameDuration)
 {
 }
 
@@ -45,7 +44,7 @@ void Player::Update(const Maps& map)
 
 void Player::Draw() const
 {
-    Entity::DrawHumanoid(color);
+    Entity::DrawSprite();
 }
 
 void Player::TakeHit()

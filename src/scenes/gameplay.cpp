@@ -2,10 +2,10 @@
 
 static const float hudHeight = 60.0f;
 static const float mapMargin = 20.0f;
-static const Vector2 playerSize = { 30.0f, 50.0f };
+static const Vector2 playerSize = { 32.0f, 50.0f };
 
-static const int enemiesAmount = 5;
-static const Vector2 enemiesSize = { 30.0f, 50.0f };
+static const int enemiesAmount = 10;
+static const Vector2 enemiesSize = { 32.0f, 50.0f };
 
 static const int pointsCollectiblesAmount = 3;
 static const int lifeCollectiblesAmount = 1;
@@ -66,13 +66,13 @@ Rectangle Gameplay::FindFreeSpawn(Vector2 size) const
 void Gameplay::SpawnCollectibles()
 {
     for (int i = 0; i < pointsCollectiblesAmount; i++)
-        entities.push_back(new PointsCollectible(FindFreeSpawn(collectibleSize)));
+        entities.push_back(new PointsCollectible(FindFreeSpawn(collectibleSize), pointsTexture));
 
     for (int i = 0; i < lifeCollectiblesAmount; i++)
-        entities.push_back(new LifeCollectible(FindFreeSpawn(collectibleSize)));
+        entities.push_back(new LifeCollectible(FindFreeSpawn(collectibleSize), lifeTexture));
 
     for (int i = 0; i < multiplierCollectiblesAmount; i++)
-        entities.push_back(new MultiplierCollectible(FindFreeSpawn(collectibleSize)));
+        entities.push_back(new MultiplierCollectible(FindFreeSpawn(collectibleSize), multiplierTexture));
 }
 
 bool Gameplay::HasCollectiblesLeft() const
@@ -84,10 +84,10 @@ bool Gameplay::HasCollectiblesLeft() const
     return false;
 }
 
-Gameplay::Gameplay() : map(CalculateMapLimits()), player(CalculatePlayerSpawn(map)), hud(player), state(GameState::Playing)
+Gameplay::Gameplay() : map(CalculateMapLimits()), playerTexture(LoadTexture("res/player.png")), enemyTexture(LoadTexture("res/enemy.png")), pointsTexture(LoadTexture("res/add_points.png")), lifeTexture(LoadTexture("res/heal.png")), multiplierTexture(LoadTexture("res/multiplier.png")), player(CalculatePlayerSpawn(map), playerTexture), hud(player), state(GameState::Playing)
 {
     for (int i = 0; i < enemiesAmount; i++)
-        entities.push_back(new Enemy(FindFreeSpawn(enemiesSize)));
+        entities.push_back(new Enemy(FindFreeSpawn(enemiesSize), enemyTexture));
 
     SpawnCollectibles();
 }
@@ -96,6 +96,12 @@ Gameplay::~Gameplay()
 {
     for (size_t i = 0; i < entities.size(); i++)
         delete entities[i];
+
+    UnloadTexture(playerTexture);
+    UnloadTexture(enemyTexture);
+    UnloadTexture(pointsTexture);
+    UnloadTexture(lifeTexture);
+    UnloadTexture(multiplierTexture);
 }
 
 void Gameplay::Update()

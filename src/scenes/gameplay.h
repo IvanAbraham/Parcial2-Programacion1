@@ -21,6 +21,13 @@ private:
 	bool HasCollectiblesLeft() const;
 
 	Maps map;
+	
+	Texture2D playerTexture;
+	Texture2D enemyTexture;
+	Texture2D pointsTexture;
+	Texture2D lifeTexture;
+	Texture2D multiplierTexture;
+	
 	Player player;
 	Hud hud;
 	GameState state;

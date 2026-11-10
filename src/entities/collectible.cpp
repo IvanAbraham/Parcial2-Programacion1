@@ -1,7 +1,7 @@
 #include "collectible.h"
 #include "player.h"
 
-Collectible::Collectible(Rectangle hitbox) : Entity(hitbox)
+Collectible::Collectible(Rectangle hitbox, Texture2D sprite) : Entity(hitbox, sprite)
 {
 }
 

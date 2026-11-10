@@ -3,11 +3,8 @@
 
 class PointsCollectible : public Collectible
 {
-private:
-    Color color;
-
 public:
-    PointsCollectible(Rectangle hitbox);
+    PointsCollectible(Rectangle hitbox, Texture2D sprite);
     void Draw() const override;
     void OnCollect(Player& player) override;
 };

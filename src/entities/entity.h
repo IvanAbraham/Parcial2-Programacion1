@@ -8,7 +8,8 @@ class Entity
 protected:
 	Rectangle hitBox;
 	bool active;
-	void DrawHumanoid(Color color) const;
+	Texture2D sprite;
+	void DrawSprite() const;
 
 public:
 	Rectangle GetHitBox() const;
@@ -20,6 +21,6 @@ public:
 	virtual void OnPlayerCollision(Player& player);
 	virtual bool IsCollectible() const;
 
-	Entity(Rectangle hitBox);
+	Entity(Rectangle hitBox, Texture2D sprite);
 	virtual ~Entity();
 };	

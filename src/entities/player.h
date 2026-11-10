@@ -10,11 +10,10 @@ private:
 	int score;
 	float speed;
 	Vector2 spawnPoint;
-	Color color;
 	float remainingTime;
 
 public:
-	Player(Rectangle playerHitbox);
+	Player(Rectangle playerHitbox, Texture2D sprite);
 	void TakeHit();
 	void Update(const Maps& map);
 	int GetLife() const;

@@ -3,11 +3,8 @@
 
 class LifeCollectible : public Collectible
 {
-private:
-    Color color;
-
 public:
-    LifeCollectible(Rectangle hitbox);
+    LifeCollectible(Rectangle hitbox, Texture2D sprite);
     void Draw() const override;
     void OnCollect(Player& player) override;
 };
